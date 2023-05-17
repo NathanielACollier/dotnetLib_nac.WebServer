@@ -49,7 +49,7 @@ public class WebServer
     {
         ThreadPool.QueueUserWorkItem(o =>
         {
-            Console.WriteLine("Webserver running...");
+            log.Info("Webserver running...");
             try
             {
                 while (_listener.IsListening)
