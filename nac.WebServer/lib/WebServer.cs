@@ -76,7 +76,16 @@ public class WebServer
                             // always close the stream
                             if (ctx != null)
                             {
-                                ctx.Response.OutputStream.Close();
+                                // sometimes output stream is closed already
+                                try
+                                {
+                                    ctx.Response.OutputStream.Close();
+                                }
+                                catch (Exception ex)
+                                {
+                                    log.Error($"Outputstream might have been closed already.  Exception: {ex}");
+                                }
+                                
                             }
                         }
                     }, _listener.GetContext());
