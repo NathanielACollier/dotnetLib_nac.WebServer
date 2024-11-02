@@ -17,6 +17,14 @@ public class GeneralTests
             if(_e.Request.Url.LocalPath == "/"){
                 _e.Response.WriteTextResponse( "text/html", @"
                     <div style='color:green;'>Hello World!</div>
+
+                    <button type='button' onclick='onClick_Quit()'>Quit</button>
+
+                    <script type='text/javascript'>
+                        function onClick_Quit(){{
+                            window.location.href = '/quit';
+                        }}
+                    </script>
                 ");
             }
 
