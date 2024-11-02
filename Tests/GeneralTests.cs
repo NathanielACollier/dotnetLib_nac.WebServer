@@ -7,9 +7,10 @@ namespace Tests;
 public class GeneralTests
 {
     [TestMethod]
-    public void GetHTMLHelloWorld()
+    public async Task GetHTMLHelloWorld()
     {
         var webMan = new nac.WebServer.WebServerManager();
+        var promiseQuit = new System.Threading.Tasks.TaskCompletionSource<bool>();
 
         webMan.OnNewRequest += (_s, _e) =>
         {
@@ -18,7 +19,16 @@ public class GeneralTests
                     <div style='color:green;'>Hello World!</div>
                 ");
             }
+
+            if (string.Equals(_e.Request.Url.LocalPath, "/quit"))
+            {
+                promiseQuit.SetResult(true);
+            }
         };
         webMan.Start();
+
+        var proc = lib.Browser.OpenBrowser(webMan.Url);
+
+        await promiseQuit.Task;
     }
 }
