@@ -19,4 +19,10 @@ public static class HttpListenerResponseExtensions
         response.ContentLength64 = data.Length;
         response.OutputStream.Write(data, 0, data.Length);
     }
+
+
+    public static void WriteHtmlResponse(this HttpListenerResponse response, string html)
+    {
+        WriteTextResponse(response, "text/html", html);
+    }
 }

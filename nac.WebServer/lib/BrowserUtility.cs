@@ -1,9 +1,10 @@
+﻿using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 
-namespace Tests.lib;
+namespace nac.WebServer.lib;
 
-public static class Browser
+public class BrowserUtility
 {
     public static System.Diagnostics.Process OpenBrowser(string url)
     {

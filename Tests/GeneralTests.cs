@@ -15,7 +15,7 @@ public class GeneralTests
         webMan.OnNewRequest += (_s, _e) =>
         {
             if(_e.Request.Url.LocalPath == "/"){
-                _e.Response.WriteTextResponse( "text/html", @"
+                _e.Response.WriteHtmlResponse( @"
                     <div style='color:green;'>Hello World!</div>
 
                     <button type='button' onclick='onClick_Quit()'>Quit</button>
@@ -35,7 +35,7 @@ public class GeneralTests
         };
         webMan.Start();
 
-        var proc = lib.Browser.OpenBrowser(webMan.Url);
+        var proc = nac.WebServer.lib.BrowserUtility.OpenBrowser(webMan.Url);
 
         await promiseQuit.Task;
     }
